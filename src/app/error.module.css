@@ -1,0 +1,312 @@
+.container {
+  position: relative;
+  min-height: 70vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  overflow: hidden;
+
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+/* ---------- LIGHT ---------- */
+
+.container.light {
+  background: #f7f4ef;
+  color: #27232d;
+}
+
+/* ---------- DARK ---------- */
+
+.container.dark {
+  background: #111318;
+  color: #f5f5f7;
+}
+
+
+/* ---------- GLOW ---------- */
+
+.glow {
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  border-radius: 50%;
+
+  filter: blur(70px);
+
+  opacity: 0.45;
+
+  pointer-events: none;
+
+  animation: floating 6s ease-in-out infinite;
+}
+
+.light .glow {
+  background: #d8c4ff;
+}
+
+.dark .glow {
+  background: #6337ff;
+}
+
+
+/* ---------- CARD ---------- */
+
+.card {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 420px;
+
+  padding: 36px 24px;
+
+  text-align: center;
+
+  border-radius: 28px;
+
+  backdrop-filter: blur(20px);
+
+  transition:
+    background 0.4s ease,
+    border 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+
+/* light card */
+
+.light .card {
+  background: rgba(255, 255, 255, 0.75);
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  box-shadow:
+    0 25px 70px rgba(91, 72, 120, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+
+/* dark card */
+
+.dark .card {
+  background: rgba(29, 31, 40, 0.78);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+
+/* ---------- ICON ---------- */
+
+.icon {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  transform: rotate(-6deg);
+}
+
+.light .icon {
+  background: linear-gradient(
+    135deg,
+    #eee6ff,
+    #f9ddeb
+  );
+
+  color: #7955c7;
+
+  box-shadow:
+    0 10px 30px rgba(121, 85, 199, 0.15);
+}
+
+.dark .icon {
+  background: linear-gradient(
+    135deg,
+    #37216b,
+    #51245d
+  );
+
+  color: #d8b8ff;
+
+  box-shadow:
+    0 10px 30px rgba(111, 62, 255, 0.2);
+}
+
+
+/* ---------- LABEL ---------- */
+
+.label {
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  opacity: 0.55;
+}
+
+
+/* ---------- TITLE ---------- */
+
+.card h2 {
+  margin: 0;
+
+  font-size: 25px;
+  line-height: 1.2;
+
+  letter-spacing: -0.5px;
+}
+
+
+/* ---------- TEXT ---------- */
+
+.card p {
+  max-width: 320px;
+
+  margin: 14px auto 26px;
+
+  font-size: 14px;
+  line-height: 1.6;
+
+  opacity: 0.65;
+}
+
+
+/* ---------- BUTTON ---------- */
+
+.button {
+  width: 100%;
+
+  padding: 13px 22px;
+
+  border: none;
+  border-radius: 14px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.light .button {
+  background: #292532;
+  color: white;
+
+  box-shadow:
+    0 10px 25px rgba(41, 37, 50, 0.2);
+}
+
+.dark .button {
+  background: linear-gradient(
+    135deg,
+    #7c4dff,
+    #9b62ff
+  );
+
+  color: white;
+
+  box-shadow:
+    0 10px 30px rgba(124, 77, 255, 0.3);
+}
+
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button:focus-visible {
+  outline: 3px solid rgba(124, 77, 255, 0.3);
+  outline-offset: 3px;
+}
+
+
+/* ---------- ANIMATION ---------- */
+
+@keyframes floating {
+  0%,
+  100% {
+    transform: translate(
+      -20px,
+      -10px
+    );
+  }
+
+  50% {
+    transform: translate(
+      20px,
+      20px
+    );
+  }
+}
+
+
+/* ---------- TABLET / DESKTOP ---------- */
+
+@media (min-width: 768px) {
+  .container {
+    min-height: 75vh;
+
+    padding: 40px;
+  }
+
+  .card {
+    max-width: 480px;
+
+    padding: 48px 40px;
+
+    border-radius: 32px;
+  }
+
+  .card h2 {
+    font-size: 30px;
+  }
+
+  .card p {
+    font-size: 15px;
+  }
+
+  .button {
+    width: auto;
+
+    min-width: 160px;
+  }
+
+  .glow {
+    width: 320px;
+    height: 320px;
+  }
+}
