@@ -1,0 +1,251 @@
+
+
+.header {
+  width: calc(100% - 24px);
+  min-height: 60px;
+
+  margin: 12px auto;
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  border-radius: 16px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border 0.3s ease,
+    box-shadow 0.3s ease;
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+
+
+.logo {
+  text-decoration: none;
+
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+
+
+.authLinks {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.authLinks a {
+  padding: 8px 9px;
+
+  border-radius: 9px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+
+
+.logoutBtn {
+  padding: 8px 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.logoutBtn:active {
+  transform: scale(0.97);
+}
+
+
+
+
+.header.light {
+  background: rgba(255, 255, 255, 0.82);
+  color: #29243a;
+
+  border: 1px solid rgba(120, 80, 160, 0.12);
+
+  box-shadow:
+    0 8px 25px rgba(90, 70, 120, 0.08),
+    0 2px 8px rgba(90, 70, 120, 0.04);
+}
+
+.light .logo {
+  background: linear-gradient(
+    135deg,
+    #7254c7,
+    #b05acb
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.light .authLinks a {
+  color: #403750;
+}
+
+.light .authLinks a:hover {
+  background: rgba(159, 80, 211, 0.09);
+  color: #7950b8;
+}
+
+.light .logoutBtn {
+  background: linear-gradient(
+    135deg,
+    #7654c7,
+    #b05acb
+  );
+
+  color: #fff;
+
+  box-shadow:
+    0 5px 14px rgba(118, 84, 199, 0.2);
+}
+
+
+.header.dark {
+  background: rgba(24, 26, 32, 0.86);
+  color: #f5f2fa;
+
+  border: 1px solid rgba(180, 130, 255, 0.1);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    0 2px 10px rgba(70, 30, 120, 0.1);
+}
+
+.dark .logo {
+  background: linear-gradient(
+    135deg,
+    #9b6cff,
+    #e09aff
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.dark .authLinks a {
+  color: #ded7ed;
+}
+
+.dark .authLinks a:hover {
+  background: rgba(139, 85, 211, 0.15);
+  color: #c395ff;
+}
+
+.dark .logoutBtn {
+  background: linear-gradient(
+    135deg,
+    #6b3fc4,
+    #914bc0
+  );
+
+  color: #fff;
+
+  box-shadow:
+    0 5px 15px rgba(107, 63, 196, 0.28);
+}
+
+
+
+
+@media (min-width: 600px) {
+  .header {
+    width: calc(100% - 40px);
+
+    min-height: 68px;
+
+    padding: 0 22px;
+
+    margin-top: 16px;
+
+    border-radius: 19px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .authLinks {
+    gap: 8px;
+  }
+
+  .authLinks a {
+    padding: 9px 13px;
+    font-size: 13px;
+  }
+
+  .logoutBtn {
+    padding: 9px 15px;
+    font-size: 13px;
+  }
+}
+
+
+
+
+@media (min-width: 1000px) {
+  .header {
+    width: calc(100% - 64px);
+
+    min-height: 72px;
+
+    padding: 0 28px;
+
+    margin-top: 20px;
+
+    border-radius: 21px;
+  }
+
+  .logo {
+    font-size: 25px;
+  }
+
+  .authLinks {
+    gap: 10px;
+  }
+
+  .authLinks a {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .logoutBtn {
+    padding: 10px 17px;
+    font-size: 14px;
+  }
+}
