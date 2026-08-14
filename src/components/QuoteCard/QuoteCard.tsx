@@ -1,28 +1,60 @@
 "use client";
-import Link from "next/link";
+
 import { Quote } from "@/types/quotes";
-import css from "./QuoteCard.module.css";
 import { useThemeStore } from "@/store/useThemeStore";
+import { useAuthStore } from "@/store/useAuthStore";
+import css from "./QuoteCard.module.css";
 
 interface QuoteCardProps {
-  quotes: Quote[] | undefined;
+  quote: Quote;
+  onEdit?: (quote: Quote) => void;
+  onDelete?: (quoteId: string) => void;
 }
 
-export default function QuoteCard({ quotes }: QuoteCardProps) {
+export default function QuoteCard({ quote, onEdit, onDelete }: QuoteCardProps) {
   const theme = useThemeStore((state) => state.theme);
+  const user = useAuthStore((state) => state.user);
 
-
+  const isOwner = Boolean(user && quote.userId && user._id === quote.userId);
+  console.log("USER:", user);
+  console.log("USER ID:", user?._id);
+  console.log("QUOTE USER ID:", quote.userId);
+  console.log("IS OWNER:", user?._id === quote.userId);
   return (
-    <ul className={`${css.list} ${css[theme]}`}>
-      {quotes?.map((quote: Quote) => (
-        <li key={quote._id} className={css.item}>
-          <p className={css.quoteText}>{quote.text}</p>
-          <p>{quote.author}</p>
-          <p>{quote.category}</p>
-          <p>{quote.likesCount}</p>
-          <p>{quote.createdAt}</p>
-        </li>
-      ))}
-    </ul>
+    <li className={`${css.item} ${css[theme]}`}>
+      <p className={css.quoteText}>{quote.text}</p>
+
+      <p className={css.author}> {quote.author}</p>
+
+      <div className={css.meta}>
+        <span className={css.category}>{quote.category}</span>
+
+        <span className={css.likes}>❤️ {quote.likesCount}</span>
+
+        <span className={css.date}>
+          {new Date(quote.createdAt).toLocaleDateString("uk-UA")}
+        </span>
+      </div>
+
+      {isOwner && (
+        <div className={css.actions}>
+          <button
+            type="button"
+            className={css.editBtn}
+            onClick={() => onEdit?.(quote)}
+          >
+            Edit
+          </button>
+
+          <button
+            type="button"
+            className={css.deleteBtn}
+            onClick={() => onDelete?.(quote._id)}
+          >
+            Delete
+          </button>
+        </div>
+      )}
+    </li>
   );
 }

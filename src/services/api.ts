@@ -28,8 +28,17 @@ export const loginUser = async ({ email,password}:UserProps) => {
     return res.data
 };
 
-export const getQuotes = async (): Promise<QuotesResponse> => { 
- 
-    const res = await api.get<QuotesResponse>('/quotes');
-    return res.data;
+export const getQuotes = async (
+  page: number,
+  search?: string
+): Promise<QuotesResponse> => {
+  const perPage = 10;
+
+  const endpoint = search
+    ? `/quotes?page=${page}&perPage=${perPage}&search=${search}`
+    : `/quotes?page=${page}&perPage=${perPage}`;
+
+  const res = await api.get<QuotesResponse>(endpoint);
+
+  return res.data;
 };

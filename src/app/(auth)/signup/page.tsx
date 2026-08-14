@@ -6,6 +6,8 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { useThemeStore } from "@/store/useThemeStore";
 import css from "./page.module.css";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const registerSchema = Yup.object().shape({
   email: Yup.string()
@@ -19,6 +21,7 @@ const registerSchema = Yup.object().shape({
 });
 
 export default function SignUp() {
+  const router = useRouter();
   const theme = useThemeStore((state) => state.theme);
   const mutation = useMutation({
     mutationFn: registerUser,
@@ -26,6 +29,11 @@ export default function SignUp() {
       toast.success("User registered");
     },
     onError: (error) => {
+      if (axios.isAxiosError(error) && error.response?.status === 400) {
+        toast.error("This email is already registered. Please login.");
+        router.push("/login");
+        return;
+      }
       toast.error(`Error: ${error}`);
     },
   });
