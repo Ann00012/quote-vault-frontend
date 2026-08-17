@@ -1,0 +1,105 @@
+.input {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 16px;
+
+  border-radius: 14px;
+  border: 1px solid transparent;
+  outline: none;
+
+  font-size: 14px;
+  font-family: inherit;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  opacity: 0.55;
+}
+
+
+
+.light {
+  color: #30283a;
+  background: rgba(255, 255, 255, 0.8);
+
+  border-color: rgba(115, 80, 150, 0.15);
+
+  box-shadow:
+    0 5px 18px rgba(80, 60, 110, 0.06);
+}
+
+.light:focus {
+  border-color: #a98bd4;
+
+  box-shadow:
+    0 0 0 3px rgba(169, 139, 212, 0.14),
+    0 6px 20px rgba(80, 60, 110, 0.08);
+}
+
+.light:hover {
+  border-color: rgba(115, 80, 150, 0.25);
+}
+
+
+
+
+.dark {
+  color: #f5f1fa;
+  background: rgba(28, 30, 39, 0.85);
+
+  border-color: rgba(180, 130, 255, 0.12);
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dark::placeholder {
+  color: #b8afc2;
+}
+
+.dark:focus {
+  border-color: #9c6de5;
+
+  box-shadow:
+    0 0 0 3px rgba(156, 109, 229, 0.15),
+    0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.dark:hover {
+  border-color: rgba(180, 130, 255, 0.22);
+}
+
+
+
+
+@media (min-width: 600px) {
+  .input {
+    height: 48px;
+    padding: 0 18px;
+
+    font-size: 15px;
+
+    border-radius: 15px;
+  }
+}
+
+
+
+@media (min-width: 1000px) {
+  .input {
+    max-width: 420px;
+    height: 50px;
+
+    padding: 0 20px;
+
+    font-size: 15px;
+    border-radius: 16px;
+  }
+}

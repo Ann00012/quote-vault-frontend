@@ -42,3 +42,8 @@ export const getQuotes = async (
 
   return res.data;
 };
+
+export const getSingleQuote = async (id: string) => { 
+    const res = await api.get<Quote>(`/quotes/${id}`);
+    return res.data
+}

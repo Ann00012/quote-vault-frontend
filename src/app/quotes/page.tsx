@@ -21,9 +21,11 @@ export default function Quotes() {
     isLoading,
     isError,
     error,
+    isPending,
   } = useQuery({
     queryKey: ["quotes", debounced, page],
-    queryFn: () => getQuotes(page,debounced ),
+    queryFn: () => getQuotes(page, debounced),
+    placeholderData: (previousData) => previousData,
   });
 
   useEffect(() => {
@@ -42,8 +44,8 @@ export default function Quotes() {
     setPage(1);
   };
 
-  const totalPages = quotes?quotes?.totalPages:0
-  if (isLoading) {
+  const totalPages = quotes ? quotes?.totalPages : 0;
+  if (isLoading && !quotes) {
     return <Loader />;
   }
 
@@ -54,7 +56,9 @@ export default function Quotes() {
   return (
     <main className={`${css.container} ${css[theme]}`}>
       <h1 className={css.title}>All Quotes</h1>
-      <SearchBar text={text} onChange={handleChange} />
+      <div className={css.toolbar}>
+        <SearchBar text={text} onChange={handleChange} />
+      </div>
       <ul className={css.list}>
         {quotes?.quotes.map((quote: Quote) => (
           <QuoteCard key={quote._id} quote={quote} />

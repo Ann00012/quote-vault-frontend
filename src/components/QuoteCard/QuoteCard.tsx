@@ -4,7 +4,7 @@ import { Quote } from "@/types/quotes";
 import { useThemeStore } from "@/store/useThemeStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import css from "./QuoteCard.module.css";
-
+import Link from "next/link";
 interface QuoteCardProps {
   quote: Quote;
   onEdit?: (quote: Quote) => void;
@@ -22,20 +22,21 @@ export default function QuoteCard({ quote, onEdit, onDelete }: QuoteCardProps) {
   console.log("IS OWNER:", user?._id === quote.userId);
   return (
     <li className={`${css.item} ${css[theme]}`}>
-      <p className={css.quoteText}>{quote.text}</p>
+      <Link href={`/quotes/${quote._id}`} className={css.cardLink}>
+        <p className={css.quoteText}>{quote.text}</p>
 
-      <p className={css.author}> {quote.author}</p>
+        <p className={css.author}> {quote.author}</p>
 
-      <div className={css.meta}>
-        <span className={css.category}>{quote.category}</span>
+        <div className={css.meta}>
+          <span className={css.category}>{quote.category}</span>
 
-        <span className={css.likes}>❤️ {quote.likesCount}</span>
+          <span className={css.likes}>❤️ {quote.likesCount}</span>
 
-        <span className={css.date}>
-          {new Date(quote.createdAt).toLocaleDateString("uk-UA")}
-        </span>
-      </div>
-
+          <span className={css.date}>
+            {new Date(quote.createdAt).toLocaleDateString("uk-UA")}
+          </span>
+        </div>
+      </Link>
       {isOwner && (
         <div className={css.actions}>
           <button
