@@ -35,11 +35,8 @@ export default function ClientPage() {
         <NeuroNoise
           width={window.innerWidth}
           height={window.innerHeight}
-          colors={
-            theme === "dark"
-              ? ["#7300ff", "#eba8ff", "#00bfff", "#2b00ff"]
-              : ["#DDE7FF", "#EADCF8", "#F8DCE8", "#FFE8D6"]
-          }
+          colorFront={theme === "dark" ? "#7300ff" : "#DDE7FF"}
+          colorMid={theme === "dark" ? "#eba8ff" : "#EADCF8"}
           colorBack={theme === "dark" ? "#121316" : "#f7f4ef"}
           brightness={theme === "dark" ? 0.08 : 0.2}
           contrast={0.3}

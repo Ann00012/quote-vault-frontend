@@ -1,5 +1,6 @@
 import { useThemeStore } from "@/store/useThemeStore";
 import css from "./SearchBar.module.css";
+import { ChangeEvent } from "react";
 
 interface SearchBarProps {
   text: string;
