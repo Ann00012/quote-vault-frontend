@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { useThemeStore } from "@/store/useThemeStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import css from "./page.module.css";
+import { useRouter } from "next/navigation";
 
 const registerSchema = Yup.object().shape({
   email: Yup.string()
@@ -20,18 +21,23 @@ const registerSchema = Yup.object().shape({
 });
 
 export default function SignIn() {
+  const router = useRouter();
   const theme = useThemeStore((state) => state.theme);
   const setAuth = useAuthStore((state) => state.setAuth);
+
   const mutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       toast.success("User login");
-      setAuth(data.user, null);
+      console.log("ЩО ПОВЕРНУВ БЕКЕНД:", data);
+      setAuth(data, "cookie-token");
+      router.push("/quotes");
     },
-    onError: (error) => {
-      toast.error(`Error: ${error}`);
+    onError: (error: any) => {
+      toast.error(`Error: ${error.message || error}`);
     },
   });
+
   return (
     <Formik
       initialValues={{
@@ -39,12 +45,8 @@ export default function SignIn() {
         password: "",
       }}
       validationSchema={registerSchema}
-      onSubmit={(values, { resetForm }) => {
-        mutation.mutate(values, {
-          onSuccess: () => {
-            resetForm();
-          },
-        });
+      onSubmit={(values) => {
+        mutation.mutate(values);
       }}
     >
       <Form className={`${css.form} ${css[theme]}`}>
@@ -63,7 +65,7 @@ export default function SignIn() {
         </label>
         {mutation.isError && <p>{mutation.error.message}</p>}
         <button type="submit" disabled={mutation.isPending}>
-          {mutation.isPending ? "Creating..." : "Log In"}
+          {mutation.isPending ? "Loading..." : "Log In"}
         </button>
       </Form>
     </Formik>

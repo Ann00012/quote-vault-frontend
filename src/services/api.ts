@@ -1,6 +1,6 @@
 import { Quote } from '../types/quotes';
 import api from './baseURL';
-
+import { categories } from '../types/quotes';
 interface UserProps { 
     email: string,
     password:string
@@ -12,6 +12,12 @@ export interface QuotesResponse {
   totalItems: number;
   totalPages: number;
   quotes: Quote[];
+}
+
+interface CreateQuoteProps { 
+    text: string;
+    author: string;
+    category:(typeof categories)[number];
 }
 export const getRandomQuote = async () => {
     const res = await api.get<Quote>("/quotes/random");
@@ -47,3 +53,8 @@ export const getSingleQuote = async (id: string) => {
     const res = await api.get<Quote>(`/quotes/${id}`);
     return res.data
 }
+
+export const createQuote = async ({ text, author, category }: CreateQuoteProps) => {
+    const res = await api.post<Quote>("/quote", { text, author, category });
+    return res.data;
+};

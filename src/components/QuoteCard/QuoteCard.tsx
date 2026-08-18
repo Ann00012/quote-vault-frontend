@@ -15,7 +15,14 @@ export default function QuoteCard({ quote, onEdit, onDelete }: QuoteCardProps) {
   const theme = useThemeStore((state) => state.theme);
   const user = useAuthStore((state) => state.user);
 
-  const isOwner = Boolean(user && quote.userId && user._id === quote.userId);
+  const quoteOwnerId =
+    typeof quote.userId === "object" && quote.userId !== null
+      ? (quote.userId as any)._id
+      : quote.userId;
+
+  const isOwner = Boolean(
+    user?._id && quoteOwnerId && user._id === quoteOwnerId,
+  );
   console.log("USER:", user);
   console.log("USER ID:", user?._id);
   console.log("QUOTE USER ID:", quote.userId);

@@ -11,6 +11,7 @@ import SearchBar from "@/components/SearchBar/SearchBar";
 import { useState, useEffect } from "react";
 import { useDebounce } from "use-debounce";
 import Paginations from "@/components/Pagination/Pagination";
+import Link from "next/link";
 export default function Quotes() {
   const theme = useThemeStore((state) => state.theme);
   const [text, setText] = useState("");
@@ -55,7 +56,8 @@ export default function Quotes() {
 
   return (
     <main className={`${css.container} ${css[theme]}`}>
-      <h1 className={css.title}>All Quotes</h1>
+          <h1 className={css.title}>All Quotes</h1>
+          <Link href="/quotes/create">Add quote</Link>
       <div className={css.toolbar}>
         <SearchBar text={text} onChange={handleChange} />
       </div>

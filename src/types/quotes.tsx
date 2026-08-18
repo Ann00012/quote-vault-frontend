@@ -7,3 +7,21 @@ export type Quote = {
   createdAt: string;
   userId?: string;
 };
+
+export 
+const categories = [
+  "Inspiration",
+  "Humor",
+  "Literature",
+  "Life",
+  "Wisdom",
+  "Love",
+  "Art",
+  "Motivation",
+  "Philosophy",
+  "Science",
+  "Success",
+  "Friendship",
+  "Movies",
+  "Music",
+];
