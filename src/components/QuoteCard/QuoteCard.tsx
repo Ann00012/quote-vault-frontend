@@ -5,6 +5,7 @@ import { useThemeStore } from "@/store/useThemeStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import css from "./QuoteCard.module.css";
 import Link from "next/link";
+
 interface QuoteCardProps {
   quote: Quote;
   onEdit?: (quote: Quote) => void;
@@ -17,22 +18,19 @@ export default function QuoteCard({ quote, onEdit, onDelete }: QuoteCardProps) {
 
   const quoteOwnerId =
     typeof quote.userId === "object" && quote.userId !== null
-      ? (quote.userId as any)._id
+      ? quote.userId._id
       : quote.userId;
 
   const isOwner = Boolean(
     user?._id && quoteOwnerId && user._id === quoteOwnerId,
   );
-  console.log("USER:", user);
-  console.log("USER ID:", user?._id);
-  console.log("QUOTE USER ID:", quote.userId);
-  console.log("IS OWNER:", user?._id === quote.userId);
+
   return (
     <li className={`${css.item} ${css[theme]}`}>
       <Link href={`/quotes/${quote._id}`} className={css.cardLink}>
         <p className={css.quoteText}>{quote.text}</p>
 
-        <p className={css.author}> {quote.author}</p>
+        <p className={css.author}>{quote.author}</p>
 
         <div className={css.meta}>
           <span className={css.category}>{quote.category}</span>
@@ -44,6 +42,7 @@ export default function QuoteCard({ quote, onEdit, onDelete }: QuoteCardProps) {
           </span>
         </div>
       </Link>
+
       {isOwner && (
         <div className={css.actions}>
           <button

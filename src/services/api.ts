@@ -58,3 +58,8 @@ export const createQuote = async ({ text, author, category }: CreateQuoteProps) 
     const res = await api.post<Quote>("/quote", { text, author, category });
     return res.data;
 };
+
+export const deleteQuote = async(id: string)=> { 
+    const res = await api.delete(`/quotes/${id}`);
+    return res.data;
+}

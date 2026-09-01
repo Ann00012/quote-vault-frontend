@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getQuotes } from "@/services/api";
 import QuoteCard from "@/components/QuoteCard/QuoteCard";
 import { useThemeStore } from "@/store/useThemeStore";
@@ -12,10 +12,15 @@ import { useState, useEffect } from "react";
 import { useDebounce } from "use-debounce";
 import Paginations from "@/components/Pagination/Pagination";
 import Link from "next/link";
+import { useAuthStore } from "@/store/useAuthStore";
+import { deleteQuote } from "@/services/api";
+import toast from "react-hot-toast";
 export default function Quotes() {
+  const user = useAuthStore((state) => state.user);
   const theme = useThemeStore((state) => state.theme);
   const [text, setText] = useState("");
   const [page, setPage] = useState(1);
+  const query = useQueryClient();
   const [debounced] = useDebounce(text, 300);
   const {
     data: quotes,
@@ -54,16 +59,33 @@ export default function Quotes() {
     throw error;
   }
 
+  const mutationDelete = useMutation({
+    mutationFn: (id: string) => deleteQuote(id),
+    onSuccess: () => {
+      query.invalidateQueries({
+        queryKey: ["quotes"],
+      });
+      toast.success("Quote is deleted");
+    },
+    onError: () => {
+      toast.error("Can not delete quote");
+    },
+  });
+
   return (
     <main className={`${css.container} ${css[theme]}`}>
-          <h1 className={css.title}>All Quotes</h1>
-          <Link href="/quotes/create">Add quote</Link>
+      <h1 className={css.title}>All Quotes</h1>
+      <Link href="/quotes/create">Add quote</Link>
       <div className={css.toolbar}>
         <SearchBar text={text} onChange={handleChange} />
       </div>
       <ul className={css.list}>
         {quotes?.quotes.map((quote: Quote) => (
-          <QuoteCard key={quote._id} quote={quote} />
+          <QuoteCard
+            key={quote._id}
+            quote={quote}
+            onDelete={(id) => mutationDelete.mutate(id)}
+          />
         ))}
       </ul>
       {quotes?.quotes?.length === 0 && (
