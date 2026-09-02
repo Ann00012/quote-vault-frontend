@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getQuotes } from "@/services/api";
+import { getQuotes, deleteQuote } from "@/services/api";
 import QuoteCard from "@/components/QuoteCard/QuoteCard";
 import { useThemeStore } from "@/store/useThemeStore";
 import css from "./page.module.css";
@@ -13,13 +13,14 @@ import { useDebounce } from "use-debounce";
 import Paginations from "@/components/Pagination/Pagination";
 import Link from "next/link";
 import { useAuthStore } from "@/store/useAuthStore";
-import { deleteQuote } from "@/services/api";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 export default function Quotes() {
   const user = useAuthStore((state) => state.user);
   const theme = useThemeStore((state) => state.theme);
   const [text, setText] = useState("");
   const [page, setPage] = useState(1);
+  const router = useRouter();
   const query = useQueryClient();
   const [debounced] = useDebounce(text, 300);
   const {
@@ -75,7 +76,18 @@ export default function Quotes() {
   return (
     <main className={`${css.container} ${css[theme]}`}>
       <h1 className={css.title}>All Quotes</h1>
-      <Link href="/quotes/create">Add quote</Link>
+      <Link
+        href="/quotes/create"
+        style={{
+          background: "red",
+          color: "white",
+          padding: "10px",
+          display: "inline-block",
+        }}
+      >
+        Add quote
+      </Link>
+      <p>Test</p>
       <div className={css.toolbar}>
         <SearchBar text={text} onChange={handleChange} />
       </div>
@@ -84,6 +96,7 @@ export default function Quotes() {
           <QuoteCard
             key={quote._id}
             quote={quote}
+            onEdit={() => router.push(`/quotes/${quote._id}/edit`)}
             onDelete={(id) => mutationDelete.mutate(id)}
           />
         ))}

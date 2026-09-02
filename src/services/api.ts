@@ -14,11 +14,14 @@ export interface QuotesResponse {
   quotes: Quote[];
 }
 
-interface CreateQuoteProps { 
+export interface CreateQuoteProps { 
     text: string;
     author: string;
     category:(typeof categories)[number];
 }
+
+export type UpdateQuotePayload = Partial<CreateQuoteProps>;
+
 export const getRandomQuote = async () => {
     const res = await api.get<Quote>("/quotes/random");
     return res.data;
@@ -63,3 +66,8 @@ export const deleteQuote = async(id: string)=> {
     const res = await api.delete(`/quotes/${id}`);
     return res.data;
 }
+
+export const editQuote = async (id: string, payload: UpdateQuotePayload) => {
+  const res = await api.patch<Quote>(`/quotes/${id}`, payload);
+  return res.data;
+};

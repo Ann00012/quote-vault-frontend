@@ -24,7 +24,6 @@ export default function QuoteCard({ quote, onEdit, onDelete }: QuoteCardProps) {
   const isOwner = Boolean(
     user?._id && quoteOwnerId && user._id === quoteOwnerId,
   );
-
   return (
     <li className={`${css.item} ${css[theme]}`}>
       <Link href={`/quotes/${quote._id}`} className={css.cardLink}>
