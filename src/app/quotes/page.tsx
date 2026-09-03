@@ -35,6 +35,19 @@ export default function Quotes() {
     placeholderData: (previousData) => previousData,
   });
 
+  const mutationDelete = useMutation({
+    mutationFn: (id: string) => deleteQuote(id),
+    onSuccess: () => {
+      query.invalidateQueries({
+        queryKey: ["quotes"],
+      });
+      toast.success("Quote is deleted");
+    },
+    onError: () => {
+      toast.error("Can not delete quote");
+    },
+  });
+
   useEffect(() => {
     const savedText = localStorage.getItem("search");
     if (savedText) {
@@ -60,34 +73,15 @@ export default function Quotes() {
     throw error;
   }
 
-  const mutationDelete = useMutation({
-    mutationFn: (id: string) => deleteQuote(id),
-    onSuccess: () => {
-      query.invalidateQueries({
-        queryKey: ["quotes"],
-      });
-      toast.success("Quote is deleted");
-    },
-    onError: () => {
-      toast.error("Can not delete quote");
-    },
-  });
-
   return (
     <main className={`${css.container} ${css[theme]}`}>
-      <h1 className={css.title}>All Quotes</h1>
-      <Link
-        href="/quotes/create"
-        style={{
-          background: "red",
-          color: "white",
-          padding: "10px",
-          display: "inline-block",
-        }}
-      >
-        Add quote
-      </Link>
-      <p>Test</p>
+      <div className={css.headerWrapper}>
+        <h1 className={css.title}>All Quotes</h1>
+        <Link href="/quotes/create" className={css.addBtn}>
+          <span className={css.plusIcon}>+</span> Add quote
+        </Link>
+      </div>
+
       <div className={css.toolbar}>
         <SearchBar text={text} onChange={handleChange} />
       </div>

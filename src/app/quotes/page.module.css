@@ -28,9 +28,17 @@
   color: inherit;
 }
 
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  
+  margin-bottom: 24px;
+}
 
 .title {
-  margin: 0 0 22px;
+ margin: 0;
 
   font-size: 28px;
   line-height: 1.15;
@@ -92,6 +100,65 @@
   margin-top: 80px;
 }
 
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 22px;
+ margin-bottom: 0;
+
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.plusIcon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.light .addBtn {
+  background-color: #b05acb;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(176, 90, 203, 0.3);
+}
+
+.light .addBtn:hover {
+  background-color: #9d48b7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(176, 90, 203, 0.45);
+}
+
+.light .addBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(176, 90, 203, 0.25);
+}
+
+.dark .addBtn {
+  background-color: #c26edd;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(194, 110, 221, 0.35);
+}
+
+.dark .addBtn:hover {
+  background-color: #d187ea;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(194, 110, 221, 0.5);
+}
+
+.dark .addBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(194, 110, 221, 0.3);
+}
 
 
 @media (min-width: 600px) {
