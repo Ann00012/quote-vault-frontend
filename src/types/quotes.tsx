@@ -8,8 +8,7 @@ export type Quote = {
   userId?: string;
 };
 
-export 
-const categories = [
+export const categories = [
   "Inspiration",
   "Humor",
   "Literature",
@@ -25,3 +24,13 @@ const categories = [
   "Movies",
   "Music",
 ];
+
+export interface User {
+  _id: string;
+  email: string;
+  username: string;
+  avatar: string;
+  createdAt: string;
+  updatedAt: string;
+  url:string
+}

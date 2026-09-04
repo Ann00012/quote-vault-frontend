@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <TanStackProvider>
           <ShaderBackground>
             <Header />
-            {children}
+            <main className="contentWrapper">{children}</main>
           </ShaderBackground>
         </TanStackProvider>
       </body>

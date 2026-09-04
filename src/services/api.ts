@@ -1,4 +1,4 @@
-import { Quote } from '../types/quotes';
+import { Quote,User } from '../types/quotes';
 import api from './baseURL';
 import { categories } from '../types/quotes';
 interface UserProps { 
@@ -70,4 +70,17 @@ export const deleteQuote = async(id: string)=> {
 export const editQuote = async (id: string, payload: UpdateQuotePayload) => {
   const res = await api.patch<Quote>(`/quotes/${id}`, payload);
   return res.data;
+};
+
+export const updateAvatar = async (file: File): Promise<{ url: string }> => {
+  const formData = new FormData();
+  formData.append("avatar", file);
+
+  const response = await api.patch<{ url: string }>("/users/me/avatar", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+  return response.data;
 };

@@ -47,3 +47,11 @@ a {
     color-scheme: dark;
   }
 }
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: calc(100vh - 70px);
+  width: 100%;
+}
