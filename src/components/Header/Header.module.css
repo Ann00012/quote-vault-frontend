@@ -1,7 +1,4 @@
-
-
 .header {
- 
   width: calc(100% - 24px);
   min-height: 60px;
 
@@ -13,7 +10,6 @@
   justify-content: space-between;
 
   box-sizing: border-box;
-
   border-radius: 16px;
 
   transition:
@@ -26,15 +22,17 @@
   -webkit-backdrop-filter: blur(16px);
 }
 
-
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
 .logo {
   text-decoration: none;
-
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.5px;
-
   transition: opacity 0.2s ease;
 }
 
@@ -42,26 +40,34 @@
   opacity: 0.8;
 }
 
+.navLink {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
 .userMenu {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
 }
 
 .profileLink {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
   color: inherit;
 }
 
 .avatarImg,
 .avatarFallback {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .avatarImg {
@@ -75,9 +81,12 @@
   background-color: #b05acb;
   color: #fff;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
 }
 
+.userName {
+  display: none;
+}
 
 .authLinks {
   display: flex;
@@ -87,32 +96,23 @@
 
 .authLinks a {
   padding: 8px 9px;
-
   border-radius: 9px;
-
   font-size: 12px;
   font-weight: 600;
-
   text-decoration: none;
-
   transition:
     background 0.2s ease,
     color 0.2s ease;
 }
 
-
-
 .logoutBtn {
-  padding: 8px 12px;
-
+  padding: 7px 11px;
   border: none;
-  border-radius: 10px;
-
+  border-radius: 9px;
   font-size: 12px;
   font-weight: 600;
-
   cursor: pointer;
-
+  white-space: nowrap;
   transition:
     transform 0.2s ease,
     opacity 0.2s ease;
@@ -122,30 +122,28 @@
   transform: scale(0.97);
 }
 
-
-
-
 .header.light {
   background: rgba(255, 255, 255, 0.82);
   color: #29243a;
-
   border: 1px solid rgba(120, 80, 160, 0.12);
-
   box-shadow:
     0 8px 25px rgba(90, 70, 120, 0.08),
     0 2px 8px rgba(90, 70, 120, 0.04);
 }
 
 .light .logo {
-  background: linear-gradient(
-    135deg,
-    #7254c7,
-    #b05acb
-  );
-
+  background: linear-gradient(135deg, #7254c7, #b05acb);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+.light .navLink {
+  color: #554a6b;
+}
+
+.light .navLink:hover {
+  color: #7254c7;
 }
 
 .light .authLinks a {
@@ -158,40 +156,33 @@
 }
 
 .light .logoutBtn {
-  background: linear-gradient(
-    135deg,
-    #7654c7,
-    #b05acb
-  );
-
+  background: linear-gradient(135deg, #7654c7, #b05acb);
   color: #fff;
-
-  box-shadow:
-    0 5px 14px rgba(118, 84, 199, 0.2);
+  box-shadow: 0 5px 14px rgba(118, 84, 199, 0.2);
 }
-
 
 .header.dark {
   background: rgba(24, 26, 32, 0.86);
   color: #f5f2fa;
-
   border: 1px solid rgba(180, 130, 255, 0.1);
-
   box-shadow:
     0 8px 25px rgba(0, 0, 0, 0.3),
     0 2px 10px rgba(70, 30, 120, 0.1);
 }
 
 .dark .logo {
-  background: linear-gradient(
-    135deg,
-    #9b6cff,
-    #e09aff
-  );
-
+  background: linear-gradient(135deg, #9b6cff, #e09aff);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+.dark .navLink {
+  color: #ded7ed;
+}
+
+.dark .navLink:hover {
+  color: #c395ff;
 }
 
 .dark .authLinks a {
@@ -204,36 +195,50 @@
 }
 
 .dark .logoutBtn {
-  background: linear-gradient(
-    135deg,
-    #6b3fc4,
-    #914bc0
-  );
-
+  background: linear-gradient(135deg, #6b3fc4, #914bc0);
   color: #fff;
-
-  box-shadow:
-    0 5px 15px rgba(107, 63, 196, 0.28);
+  box-shadow: 0 5px 15px rgba(107, 63, 196, 0.28);
 }
-
-
-
 
 @media (min-width: 600px) {
   .header {
     width: calc(100% - 40px);
-
     min-height: 68px;
-
     padding: 0 22px;
-
     margin-top: 16px;
-
     border-radius: 19px;
+  }
+
+  .navLinks {
+    gap: 20px;
   }
 
   .logo {
     font-size: 22px;
+  }
+
+  .navLink {
+    font-size: 14px;
+  }
+
+  .userMenu {
+    gap: 14px;
+  }
+
+  .avatarImg,
+  .avatarFallback {
+    width: 38px;
+    height: 38px;
+  }
+
+  .userName {
+    display: inline;
+    font-size: 13px;
+    font-weight: 500;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .authLinks {
@@ -246,29 +251,27 @@
   }
 
   .logoutBtn {
-    padding: 9px 15px;
+    padding: 8px 14px;
     font-size: 13px;
   }
 }
 
-
-
-
 @media (min-width: 1000px) {
   .header {
     width: calc(100% - 64px);
-
     min-height: 72px;
-
     padding: 0 28px;
-
     margin-top: 20px;
-
     border-radius: 21px;
   }
 
   .logo {
     font-size: 25px;
+  }
+
+  .userName {
+    font-size: 14px;
+    max-width: 200px;
   }
 
   .authLinks {
@@ -281,7 +284,7 @@
   }
 
   .logoutBtn {
-    padding: 10px 17px;
+    padding: 9px 16px;
     font-size: 14px;
   }
 }

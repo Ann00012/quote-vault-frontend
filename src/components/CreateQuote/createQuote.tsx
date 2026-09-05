@@ -33,8 +33,8 @@ interface Props {
 }
 
 const validationSchema = Yup.object().shape({
-  text: Yup.string().min(2).max(100).required("Text is required"),
-  author: Yup.string().min(1).max(50).required("Author is required"),
+  text: Yup.string().min(2).max(300).required("Text is required"),
+  author: Yup.string().min(1).max(100).required("Author is required"),
   category: Yup.string().oneOf(categories).required("Category is required"),
 });
 

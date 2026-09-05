@@ -84,3 +84,17 @@ export const updateAvatar = async (file: File): Promise<{ url: string }> => {
 
   return response.data;
 };
+
+export const requestResetEmail = async (email: string) => { 
+  const res = await api.post(`/auth/request-reset-email`, { email });
+  return res.data;
+
+};
+
+export const resetPassword = async (data: {
+  token: string;
+  password: string;
+})=> {
+  const res = await api.post(`/auth/reset-password`, data);
+  return res.data;
+  };

@@ -1,4 +1,5 @@
 "use client";
+
 import css from "./Header.module.css";
 import Link from "next/link";
 import { useThemeStore } from "@/store/useThemeStore";
@@ -6,16 +7,20 @@ import { useAuthStore } from "@/store/useAuthStore";
 
 export default function Header() {
   const theme = useThemeStore((state) => state.theme);
-  const { user,isLoggedIn, clearAuth } = useAuthStore();
+  const { user, isLoggedIn, clearAuth } = useAuthStore();
 
   return (
     <header className={`${css.header} ${css[theme]}`}>
-      <Link href="/" className={css.logo}>
-        QuoteVault
-      </Link>
-      <Link href="/quotes">All quotes</Link>
+      <div className={css.navLinks}>
+        <Link href="/" className={css.logo}>
+          QuoteVault
+        </Link>
+        <Link href="/quotes" className={css.navLink}>
+          All quotes
+        </Link>
+      </div>
 
-      {isLoggedIn ? (
+      {isLoggedIn && user ? (
         <div className={css.userMenu}>
           <Link
             href="/profile"

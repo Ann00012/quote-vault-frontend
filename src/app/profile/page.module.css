@@ -212,6 +212,176 @@
   background-color: #b05acb;
 }
 
+/* =========================================================
+   SECURITY BLOCK (MOBILE FIRST: 320px+)
+   ========================================================= */
+
+.securityBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  
+  padding-top: 18px;
+  margin-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  box-sizing: border-box;
+}
+
+.securityTitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+}
+
+.securityDesc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+.resetBtn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  padding: 11px 16px;
+  margin-top: 4px;
+  border-radius: 12px;
+  border: none;
+  
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.resetBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.resetBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.resetBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* =========================================================
+   THEME STYLES (LIGHT / DARK)
+   ========================================================= */
+
+/* === Світла тема (Light): контраст на фіолетовій картці === */
+.light .securityBlock {
+  border-top-color: rgba(255, 255, 255, 0.22);
+}
+
+.light .securityTitle {
+  color: #ffffff;
+}
+
+.light .securityDesc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.light .resetBtn {
+  background-color: #ffffff;
+  color: #8b3ba7;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.light .resetBtn:hover:not(:disabled) {
+  background-color: #f7f5fa;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+
+/* === Темна тема (Dark): графітова картка === */
+.dark .securityBlock {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark .securityTitle {
+  color: #ffffff;
+}
+
+.dark .securityDesc {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.dark .resetBtn {
+  background: linear-gradient(135deg, #a852c4, #8b3ba7);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(176, 90, 203, 0.3);
+}
+
+.dark .resetBtn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #b962d6, #9b48b8);
+  box-shadow: 0 6px 18px rgba(176, 90, 203, 0.45);
+}
+
+
+/* =========================================================
+   MEDIA QUERIES (TABLET: 600px+)
+   ========================================================= */
+
+@media (min-width: 600px) {
+  .securityBlock {
+    padding-top: 22px;
+    gap: 12px;
+  }
+
+  .securityTitle {
+    font-size: 19px;
+  }
+
+  .securityDesc {
+    font-size: 14px;
+  }
+
+  .resetBtn {
+    width: auto;
+    align-self: flex-start;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================================
+   MEDIA QUERIES (DESKTOP: 1000px+)
+   ========================================================= */
+
+@media (min-width: 1000px) {
+  .securityBlock {
+    padding-top: 24px;
+    gap: 14px;
+  }
+
+  .securityTitle {
+    font-size: 20px;
+  }
+
+  .resetBtn {
+    padding: 11px 24px;
+    border-radius: 14px;
+    font-size: 14px;
+  }
+}
 
 
 @media (min-width: 600px) {
