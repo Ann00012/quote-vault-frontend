@@ -98,3 +98,11 @@ export const resetPassword = async (data: {
   const res = await api.post(`/auth/reset-password`, data);
   return res.data;
   };
+
+  export const logoutUser = async () => {
+  try {
+    await api.post("/auth/logout");
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+};
