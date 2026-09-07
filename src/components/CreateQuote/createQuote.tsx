@@ -18,12 +18,12 @@ const categories = [
   "Friendship",
   "Movies",
   "Music",
-];
+] as const;
 
-interface FormValues {
+export interface FormValues {
   text: string;
   author: string;
-  category: (typeof categories)[number];
+  category: (typeof categories)[number] | "";
 }
 
 interface Props {
@@ -35,7 +35,9 @@ interface Props {
 const validationSchema = Yup.object().shape({
   text: Yup.string().min(2).max(300).required("Text is required"),
   author: Yup.string().min(1).max(100).required("Author is required"),
-  category: Yup.string().oneOf(categories).required("Category is required"),
+  category: Yup.string()
+    .oneOf([...categories])
+    .required("Category is required"),
 });
 
 export default function CreateQuote({
@@ -44,27 +46,25 @@ export default function CreateQuote({
   isEdit,
 }: Props) {
   const theme = useThemeStore((state) => state.theme);
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      enableReinitialize
     >
       <Form className={`${css.form} ${css[theme]}`}>
         <label htmlFor="text">
           Text
           <Field id="text" name="text" placeholder="Enter quote text..." />
-          <ErrorMessage name="text" component="div" style={{ color: "red" }} />
+          <ErrorMessage name="text" component="div" className={css.error} />
         </label>
 
         <label htmlFor="author">
           Author
           <Field id="author" name="author" placeholder="Enter author..." />
-          <ErrorMessage
-            name="author"
-            component="div"
-            style={{ color: "red" }}
-          />
+          <ErrorMessage name="author" component="div" className={css.error} />
         </label>
 
         <label htmlFor="category">
@@ -79,11 +79,7 @@ export default function CreateQuote({
               </option>
             ))}
           </Field>
-          <ErrorMessage
-            name="category"
-            component="div"
-            style={{ color: "red" }}
-          />
+          <ErrorMessage name="category" component="div" className={css.error} />
         </label>
 
         <button type="submit">{isEdit ? "Save Changes" : "Create"}</button>
