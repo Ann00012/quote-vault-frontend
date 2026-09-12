@@ -7,6 +7,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 
 export default function Header() {
   const theme = useThemeStore((state) => state.theme);
+  const toggleTheme = useThemeStore((state) => state.toggleTheme);
   const { user, isLoggedIn, clearAuth } = useAuthStore();
 
   return (
@@ -15,9 +16,23 @@ export default function Header() {
         <Link href="/" className={css.logo}>
           QuoteVault
         </Link>
+
         <Link href="/quotes" className={css.navLink}>
           All quotes
         </Link>
+
+        <button
+          onClick={toggleTheme}
+          className={`${css.themeToggle} ${css[theme]}`}
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+          title={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+        >
+          <span className={css.themeIcon}>{theme === "light" ? "☀" : "☾"}</span>
+
+          <span className={css.themeText}>
+            {theme === "light" ? "Light" : "Dark"}
+          </span>
+        </button>
       </div>
 
       {isLoggedIn && user ? (
@@ -38,11 +53,18 @@ export default function Header() {
                 {user.email?.[0].toUpperCase()}
               </div>
             )}
+
             <span className={css.userName}>{user.username || user.email}</span>
           </Link>
 
-          <button onClick={clearAuth} className={css.logoutBtn}>
-            Logout
+          <button
+            onClick={clearAuth}
+            className={css.logoutBtn}
+            aria-label="Logout"
+            title="Logout"
+          >
+            <span className={css.logoutIcon}>↪</span>
+            <span className={css.logoutText}>Logout</span>
           </button>
         </div>
       ) : (
