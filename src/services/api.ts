@@ -1,6 +1,6 @@
 import { Quote,User } from '../types/quotes';
 import api from './baseURL';
-import { categories } from '../types/quotes';
+import { categories,Category } from '../types/quotes';
 interface UserProps { 
     email: string,
     password:string
@@ -17,7 +17,7 @@ export interface QuotesResponse {
 export interface CreateQuoteProps { 
     text: string;
     author: string;
-    category:(typeof categories)[number];
+    category:Category;
 }
 
 export type UpdateQuotePayload = Partial<CreateQuoteProps>;

@@ -1,23 +1,27 @@
 "use client";
+
 import { createQuote } from "@/services/api";
-import CreateQuote from "@/components/CreateQuote/createQuote";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { categories } from "@/types/quotes";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import CreateQuote, { FormValues } from "@/components/CreateQuote/createQuote";
+
 interface CreateQuoteProps {
   text: string;
   author: string;
   category: (typeof categories)[number];
 }
+
+const initialValues: FormValues = {
+  text: "",
+  author: "",
+  category: "",
+};
+
 export default function CreateQuotePage() {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const initialValues = {
-    text: "",
-    author: "",
-    category: "",
-  };
 
   const mutation = useMutation({
     mutationFn: ({ text, author, category }: CreateQuoteProps) =>
@@ -34,16 +38,24 @@ export default function CreateQuotePage() {
     },
   });
 
-  const handleSubmit = (values: CreateQuoteProps) => {
-    mutation.mutate(values);
+  const handleSubmit = (values: FormValues) => {
+    if (!values.category) {
+      toast.error("Please select a category");
+      return;
+    }
+
+    mutation.mutate({
+      text: values.text,
+      author: values.author,
+      category: values.category,
+    });
   };
+
   return (
-    <>
-      <CreateQuote
-        initialValues={initialValues as any}
-        onSubmit={handleSubmit}
-        isEdit={false}
-      />
-    </>
+    <CreateQuote
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      isEdit={false}
+    />
   );
 }

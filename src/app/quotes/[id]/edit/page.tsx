@@ -35,21 +35,31 @@ export default function EditQuote() {
 
   if (isLoading) {
     return <Loader />;
-    }
-    if (!data) {
-  return <p>Quote not found</p>;
-}
+  }
+  if (!data) {
+    return <p>Quote not found</p>;
+  }
 
-return (
-  <CreateQuote
-    initialValues={{
-      text: data.text,
-      author: data.author,
-      category: data.category,
-    }}
-    onSubmit={(values) => mutationEdit.mutate(values)}
-    isEdit={true}
-  />
-);
-  
+  return (
+    <CreateQuote
+      initialValues={{
+        text: data.text,
+        author: data.author,
+        category: data.category,
+      }}
+      onSubmit={(values) => {
+        if (!values.category) {
+          toast.error("Please select a category");
+          return;
+        }
+
+        mutationEdit.mutate({
+          text: values.text,
+          author: values.author,
+          category: values.category,
+        });
+      }}
+      isEdit={true}
+    />
+  );
 }

@@ -2,6 +2,7 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./createQuote.module.css";
 import { useThemeStore } from "@/store/useThemeStore";
+import { Category } from "@/types/quotes";
 
 const categories = [
   "Inspiration",
@@ -23,7 +24,7 @@ const categories = [
 export interface FormValues {
   text: string;
   author: string;
-  category: (typeof categories)[number] | "";
+  category: Category | "";
 }
 
 interface Props {
